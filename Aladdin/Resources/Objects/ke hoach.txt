@@ -1,0 +1,18 @@
+- Chỉnh sửa:
++ Dồn tất cả các sprite cùng loại vào 1 hình (dùng 1 texture cho nhiều hành động)
+- Làm lại
+- Lỗi
++ Chỉnh to màn hình game
++ Chỉnh sửa vòng lặp game
++ Va chạm ->>> chú trọng
++ Lỗi camera chạy không đúng
+- Thêm:
++ Quản lý màn
++ Âm thanh
++ Số lượng táo aladdin
++ Số điểm
++ Số mạng
++ Các item
++ Số máu của kẻ thù
++ Các trạng thái mới của aladdin: chết, hồi sinh
++ Lưu lại mốc chơi gần nhất của aladdin

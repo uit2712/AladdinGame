@@ -10,8 +10,10 @@
 #define FRAME_RATE 30
 //#define SCREEN_WIDTH 322
 //#define SCREEN_HEIGHT 250
-#define SCREEN_WIDTH 600
-#define SCREEN_HEIGHT 500
+//#define SCREEN_WIDTH 966
+//#define SCREEN_HEIGHT 750
+#define SCREEN_WIDTH 660
+#define SCREEN_HEIGHT 480
 
 #pragma comment(lib, "d3d9.lib")
 #pragma comment(lib, "d3dx9.lib")
