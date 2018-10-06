@@ -5,6 +5,8 @@
 #include <d3dx9.h>
 #include "Util.h"
 #include "SceneManager.h"
+#include "DeviceInputManager.h"
+#include "KeyHandler.h"
 
 #define WIN32_LEAN_AND_MEAN
 #define FRAME_RATE 30
@@ -35,6 +37,8 @@ protected:
 
 	// game scene
 	SceneManager*			sceneManager;
+	DeviceInputManager*		m_pDIManager;
+	IKeyEventHandler*		keyHandler;
 public:
 	Game(HINSTANCE hInstance);
 	~Game(void);
@@ -42,7 +46,6 @@ public:
 	// framework methods
 	bool Init();
 	int Run();
-	void End();
 	void Update(float dt);
 	void Render(float dt);
 	LRESULT MsgProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
@@ -54,4 +57,6 @@ protected:
 	bool InitDirect3D();
 
 	void ProcessCollapsion(); // xử lý các va chạm
+
+	void ProcessKeyboard(); // xử lý bàn phím
 };

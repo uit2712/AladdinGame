@@ -3,6 +3,7 @@
 #include "Sprite.h"
 #include "Viewport.h"
 #include <string>
+#include "Debug.h"
 
 #pragma comment (lib, "d3dx9.lib")
 

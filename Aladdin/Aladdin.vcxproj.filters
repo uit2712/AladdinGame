@@ -40,6 +40,12 @@
     <Filter Include="Viewport">
       <UniqueIdentifier>{2d934664-1cc0-4a12-98d5-115957ce0f59}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Debug">
+      <UniqueIdentifier>{192f601c-9f2b-4cb1-990d-8ef98db45b90}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Input">
+      <UniqueIdentifier>{06111051-e892-462a-8eef-496ac0e741ee}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Aladdin.rc">
@@ -97,12 +103,21 @@
     <ClInclude Include="Viewport.h">
       <Filter>Viewport</Filter>
     </ClInclude>
+    <ClInclude Include="Debug.h">
+      <Filter>Debug</Filter>
+    </ClInclude>
+    <ClInclude Include="DeviceInputManager.h">
+      <Filter>Input</Filter>
+    </ClInclude>
+    <ClInclude Include="IKeyEventHandler.h">
+      <Filter>Input</Filter>
+    </ClInclude>
+    <ClInclude Include="KeyHandler.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="WinMain.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Game.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Util.cpp">
@@ -134,6 +149,18 @@
     </ClCompile>
     <ClCompile Include="Viewport.cpp">
       <Filter>Viewport</Filter>
+    </ClCompile>
+    <ClCompile Include="Debug.cpp">
+      <Filter>Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="Game.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DeviceInputManager.cpp">
+      <Filter>Input</Filter>
+    </ClCompile>
+    <ClCompile Include="KeyHandler.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
