@@ -36,7 +36,7 @@ void Background::Draw(float dt)
 			&D3DXVECTOR3(viewport->GetRect().left, viewport->GetRect().top, 0),
 			m_Color);
 #pragma endregion
-
+		
 		m_pSprite->End();
 	}
 }

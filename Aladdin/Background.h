@@ -2,9 +2,7 @@
 #include "ImageLoader.h"
 #include "Sprite.h"
 #include "Viewport.h"
-#include <string>
-
-using namespace std;
+#include "Debug.h"
 
 // Thiết lập các thông tin về background
 class Background: public Sprite
