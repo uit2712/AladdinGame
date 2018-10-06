@@ -1,4 +1,4 @@
-#include "Game.h"
+﻿#include "Game.h"
 
 namespace
 {
@@ -28,59 +28,6 @@ Game::Game(HINSTANCE hInstance)
 
 Game::~Game(void)
 {
-
-}
-
-bool Game::Init()
-{
-	if (!InitWindow())
-		return false;
-
-	if (!InitDirect3D())
-		return false;
-
-	sceneManager = new SceneManager(m_pDevice3D, SCREEN_WIDTH, SCREEN_HEIGHT);
-	sceneManager->Load(m_pDevice3D);
-
-	return true;
-}
-
-int Game::Run()
-{
-	MSG msg;
-	ZeroMemory(&msg, sizeof(MSG));
-
-	DWORD frame_start = GetTickCount();;
-	DWORD tick_per_frame = 1000 / FRAME_RATE;
-
-	while (WM_QUIT != msg.message)
-	{
-		if (PeekMessage(&msg, NULL, 0, 0, PM_REMOVE))
-		{
-			TranslateMessage(&msg);
-			DispatchMessage(&msg);
-		}
-		else
-		{
-			DWORD now = GetTickCount();
-			unsigned int dt = now - frame_start;
-			if (dt >= tick_per_frame)
-			{
-				frame_start = now;
-				// render
-				Render(0.0f);
-
-				// update
-				Update(0.0f);
-			}
-		}
-	}
-
-	return static_cast<int>(msg.wParam);
-}
-
-void Game::End()
-{
 	if (sceneManager != NULL)
 	{
 		delete sceneManager;
@@ -98,6 +45,69 @@ void Game::End()
 		m_pD3D->Release();
 		m_pD3D = NULL;
 	}
+		
+	if (m_pDIManager != NULL)
+	{
+		delete m_pDIManager;
+		m_pDIManager = NULL;
+	}
+}
+
+bool Game::Init()
+{
+	if (!InitWindow())
+		return false;
+
+	if (!InitDirect3D())
+		return false;
+
+	sceneManager = new SceneManager(m_pDevice3D, SCREEN_WIDTH, SCREEN_HEIGHT);
+	sceneManager->Load(m_pDevice3D);
+
+
+	keyHandler = new KeyHandler();
+	m_pDIManager = new DeviceInputManager();
+	m_pDIManager->InitKeyboard(m_hWnd, keyHandler);
+
+	return true;
+}
+
+int Game::Run()
+{
+	MSG msg;
+	int done = 0;
+	DWORD frameStart = GetTickCount();
+	DWORD tickPerFrame = 1000 / FRAME_RATE;
+
+	while (!done)
+	{
+		if (PeekMessage(&msg, NULL, 0, 0, PM_REMOVE))
+		{
+			if (msg.message == WM_QUIT) done = 1;
+
+			TranslateMessage(&msg);
+			DispatchMessage(&msg);
+		}
+
+		DWORD now = GetTickCount();
+
+		// dt: the time between (beginning of last frame) and now
+		// this frame: the frame we are about to render
+		DWORD dt = now - frameStart;
+
+		if (dt >= tickPerFrame)
+		{
+			frameStart = now;
+
+			ProcessKeyboard();
+
+			Update(dt);
+			Render(dt);
+		}
+		else Sleep(tickPerFrame - dt);
+	}
+
+	return 1;
 }
 
 bool Game::InitWindow()
@@ -196,6 +206,14 @@ void Game::Render(float dt)
 	ProcessCollapsion();
 }
 
+void Game::ProcessKeyboard()
+{
+	m_pDIManager->ProcessKeyboard();
+
+	// xử lý phím và thay đổi trạng thái của aladdin
+	
+}
+
 void Game::ProcessCollapsion()
 {
 	//sceneManager->ProcessCollapsion();
@@ -207,7 +225,6 @@ LRESULT Game::MsgProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
 	{
 	case WM_DESTROY:
 		PostQuitMessage(0);
-		End();
 		return 0;
 	default:
 		return DefWindowProc(hWnd, msg, wParam, lParam);
