@@ -1,7 +1,9 @@
 #include "ViewPort.h"
+#include "Debug.h"
 
 ViewPort::ViewPort(const LONG x, const LONG y, const LONG width, const LONG height)
 {
+	DebugOut("y=" + std::to_string(y));
 	m_X = x;
 	m_Y = y;
 	m_Width = width;

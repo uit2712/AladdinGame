@@ -58,15 +58,18 @@ void SceneManager::Draw(float dt)
 
 void SceneManager::SetViewPort()
 {
-	// cập nhật viewport khi aladdin nhảy lên hoặc rớt xuống (tọa độ y lệch)
-	if (aladdin->GetPosition().y != (float)viewPort->GetY() + viewPort->GetHeight()/2.0f)
+	
+	// tạm thời chưa có vtpt: cập nhật viewport khi aladdin nhảy lên hoặc rớt xuống (tọa độ y lệch)
+	if ((int)(aladdin->GetPosition().y + aladdin->GetHeight() / 2.0f) > (int)(viewPort->GetY() + viewPort->GetHeight() / 2.0f))
 	{
+		DebugOut("yAladdin=" + std::to_string((int)(aladdin->GetPosition().y + aladdin->GetHeight() / 2.0f)) + ", yViewport=" + std::to_string((int)((float)viewPort->GetY() + viewPort->GetHeight() / 2.0f)) + "\n");
 		float y = aladdin->GetPosition().y + aladdin->GetHeight()/2.0f - viewPort->GetHeight()/2.0f;
 		viewPort->SetY(y);
+		
 	}
 
 	// cập nhật viewport khi aladdin nhảy lên hoặc rớt xuống (tọa độ y lệch)
-	if (aladdin->GetPosition().x + aladdin->GetWidth() / 2.0f > viewPort->GetWidth() / 2.0f)
+	if (aladdin->GetPosition().x + aladdin->GetWidth() / 2.0f > viewPort->GetX() + viewPort->GetWidth() / 2.0f)
 	{
 		float x = aladdin->GetPosition().x + aladdin->GetWidth() / 2.0f - viewPort->GetWidth() / 2.0f;
 		viewPort->SetX(x);

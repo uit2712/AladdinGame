@@ -50,7 +50,7 @@ void Camera::Update()
 		if (m_Position.y < this->m_Height / 2.0f / m_ScaleFactors.y)
 			m_Position.y = this->m_Height / 2.0f / m_ScaleFactors.y;
 	}
-	//MessageBox(NULL, std::to_string(m_Position.y).c_str(), "fds", MB_OK);
+	
 	m_ViewMatrix = D3DXMATRIX(
 		m_ScaleFactors.x * cos(m_Angle), m_ScaleFactors.x * sin(m_Angle), 0, 0,
 		-m_ScaleFactors.y * sin(m_Angle), m_ScaleFactors.y * cos(m_Angle), 0, 0,
@@ -63,7 +63,7 @@ void Camera::Update(ViewPort* viewPort)
 {
 	m_Position.x = (FLOAT)viewPort->GetX() + viewPort->GetWidth() / 2.0f;
 	m_Position.y = (FLOAT)viewPort->GetY() + viewPort->GetHeight() / 2.0f;
-	
+	//DebugOut("y=" + std::to_string(viewPort->GetRect().top) + ", height=" + std::to_string(viewPort->GetHeight()) + "\n");
 	m_ViewMatrix = D3DXMATRIX(
 		m_ScaleFactors.x * cos(m_Angle), m_ScaleFactors.x * sin(m_Angle), 0, 0,
 		-m_ScaleFactors.y * sin(m_Angle), m_ScaleFactors.y * cos(m_Angle), 0, 0,

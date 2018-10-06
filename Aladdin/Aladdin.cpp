@@ -51,10 +51,7 @@ Aladdin::~Aladdin()
 	if (actions.size() > 0)
 	{
 		for (int i = 0; i < actions.size(); i++)
-		{
-			//delete actions[i];
 			actions[i] = NULL;
-		}
 	}
 }
 
@@ -99,5 +96,5 @@ void Aladdin::Draw(float dt)
 void Aladdin::Update(float dt)
 {
 	currentAction->Update(dt);
-	m_Position = D3DXVECTOR2(m_Position.x + 2, m_Position.y - 2);
+	m_Position = D3DXVECTOR2(m_Position.x + 2, m_Position.y);
 }
