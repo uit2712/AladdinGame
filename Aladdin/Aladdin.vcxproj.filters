@@ -16,6 +16,30 @@
     <Filter Include="Assets">
       <UniqueIdentifier>{7b21c597-7506-460e-9176-95606e203d85}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Scene">
+      <UniqueIdentifier>{94b84bfb-a548-4981-a281-6c91bc24503e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Background">
+      <UniqueIdentifier>{7157e73d-8c2a-4f18-81f7-ff20940d4712}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ImageAssets">
+      <UniqueIdentifier>{970e6612-0aff-4f42-ba49-bb116e79ddea}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Camera">
+      <UniqueIdentifier>{ae11f661-0827-4c2f-88d3-3efdc313b047}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObjects">
+      <UniqueIdentifier>{d40775ca-2b6d-4b32-9c9b-0ad6f6be3ad9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Aladdin">
+      <UniqueIdentifier>{448a7c87-ae3c-4c4e-aee4-1b559092bf65}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Interfaces">
+      <UniqueIdentifier>{c1d9dfe1-02de-4867-b08b-8b8199687287}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Viewport">
+      <UniqueIdentifier>{2d934664-1cc0-4a12-98d5-115957ce0f59}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Aladdin.rc">
@@ -37,6 +61,42 @@
     <ClInclude Include="Util.h">
       <Filter>Assets</Filter>
     </ClInclude>
+    <ClInclude Include="SceneManager.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Background.h">
+      <Filter>Background</Filter>
+    </ClInclude>
+    <ClInclude Include="BackgroundManager.h">
+      <Filter>Background</Filter>
+    </ClInclude>
+    <ClInclude Include="ImageLoader.h">
+      <Filter>ImageAssets</Filter>
+    </ClInclude>
+    <ClInclude Include="ImagePaths.h">
+      <Filter>ImageAssets</Filter>
+    </ClInclude>
+    <ClInclude Include="Aladdin.h">
+      <Filter>Aladdin</Filter>
+    </ClInclude>
+    <ClInclude Include="AladdinAction.h">
+      <Filter>Aladdin</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObjectTypes.h">
+      <Filter>GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="Sprite.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Camera.h">
+      <Filter>Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="ISprite.h">
+      <Filter>Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="Viewport.h">
+      <Filter>Viewport</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="WinMain.cpp">
@@ -47,6 +107,33 @@
     </ClCompile>
     <ClCompile Include="Util.cpp">
       <Filter>Assets</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneManager.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Background.cpp">
+      <Filter>Background</Filter>
+    </ClCompile>
+    <ClCompile Include="BackgroundManager.cpp">
+      <Filter>Background</Filter>
+    </ClCompile>
+    <ClCompile Include="ImageLoader.cpp">
+      <Filter>ImageAssets</Filter>
+    </ClCompile>
+    <ClCompile Include="Aladdin.cpp">
+      <Filter>Aladdin</Filter>
+    </ClCompile>
+    <ClCompile Include="AladdinAction.cpp">
+      <Filter>Aladdin</Filter>
+    </ClCompile>
+    <ClCompile Include="Sprite.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Camera.cpp">
+      <Filter>Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="Viewport.cpp">
+      <Filter>Viewport</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

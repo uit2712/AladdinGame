@@ -156,12 +156,33 @@
     <Image Include="small.ico" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Aladdin.h" />
+    <ClInclude Include="AladdinAction.h" />
+    <ClInclude Include="Background.h" />
+    <ClInclude Include="BackgroundManager.h" />
+    <ClInclude Include="Camera.h" />
     <ClInclude Include="Game.h" />
+    <ClInclude Include="GameObjectTypes.h" />
+    <ClInclude Include="ImageLoader.h" />
+    <ClInclude Include="ImagePaths.h" />
+    <ClInclude Include="ISprite.h" />
+    <ClInclude Include="SceneManager.h" />
+    <ClInclude Include="Sprite.h" />
     <ClInclude Include="Util.h" />
+    <ClInclude Include="Viewport.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Aladdin.cpp" />
+    <ClCompile Include="AladdinAction.cpp" />
+    <ClCompile Include="Background.cpp" />
+    <ClCompile Include="BackgroundManager.cpp" />
+    <ClCompile Include="Camera.cpp" />
     <ClCompile Include="Game.cpp" />
+    <ClCompile Include="ImageLoader.cpp" />
+    <ClCompile Include="SceneManager.cpp" />
+    <ClCompile Include="Sprite.cpp" />
     <ClCompile Include="Util.cpp" />
+    <ClCompile Include="Viewport.cpp" />
     <ClCompile Include="WinMain.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

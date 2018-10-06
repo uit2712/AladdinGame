@@ -39,7 +39,8 @@ bool Game::Init()
 	if (!InitDirect3D())
 		return false;
 
-	//sceneManager = new SceneManager(m_pDevice3D, m_hInstance, m_hWnd, SCREEN_WIDTH, SCREEN_HEIGHT);
+	sceneManager = new SceneManager(m_pDevice3D, SCREEN_WIDTH, SCREEN_HEIGHT);
+	sceneManager->Load(m_pDevice3D);
 
 	return true;
 }
@@ -80,9 +81,23 @@ int Game::Run()
 
 void Game::End()
 {
-	//Memory::SafeDelete(sceneManager);
-	Memory::SafeRelease(m_pDevice3D);
-	Memory::SafeRelease(m_pD3D);
+	if (sceneManager != NULL)
+	{
+		delete sceneManager;
+		sceneManager = NULL;
+	}
+
+	if (m_pDevice3D != NULL)
+	{
+		m_pDevice3D->Release();
+		m_pDevice3D = NULL;
+	}
+
+	if (m_pD3D != NULL)
+	{
+		m_pD3D->Release();
+		m_pD3D = NULL;
+	}
 }
 
 bool Game::InitWindow()
@@ -167,8 +182,8 @@ void Game::Update(float dt)
 
 	if (m_pDevice3D->BeginScene())
 	{
-		//sceneManager->Draw(dt);
-		//sceneManager->Update(dt);
+		sceneManager->Draw(dt);
+		sceneManager->Update(dt);
 
 		m_pDevice3D->EndScene();
 	}
