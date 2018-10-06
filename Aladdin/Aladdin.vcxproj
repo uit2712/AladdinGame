@@ -161,11 +161,15 @@
     <ClInclude Include="Background.h" />
     <ClInclude Include="BackgroundManager.h" />
     <ClInclude Include="Camera.h" />
+    <ClInclude Include="Debug.h" />
+    <ClInclude Include="DeviceInputManager.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameObjectTypes.h" />
     <ClInclude Include="ImageLoader.h" />
     <ClInclude Include="ImagePaths.h" />
     <ClInclude Include="ISprite.h" />
+    <ClInclude Include="IKeyEventHandler.h" />
+    <ClInclude Include="KeyHandler.h" />
     <ClInclude Include="SceneManager.h" />
     <ClInclude Include="Sprite.h" />
     <ClInclude Include="Util.h" />
@@ -177,8 +181,11 @@
     <ClCompile Include="Background.cpp" />
     <ClCompile Include="BackgroundManager.cpp" />
     <ClCompile Include="Camera.cpp" />
+    <ClCompile Include="Debug.cpp" />
+    <ClCompile Include="DeviceInputManager.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="ImageLoader.cpp" />
+    <ClCompile Include="KeyHandler.cpp" />
     <ClCompile Include="SceneManager.cpp" />
     <ClCompile Include="Sprite.cpp" />
     <ClCompile Include="Util.cpp" />
