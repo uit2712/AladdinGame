@@ -82,6 +82,37 @@ int DeviceInputManager::IsKeyDown(int KeyCode)
 	return (keyStates[KeyCode] & 0x80) > 0;
 }
 
+int DeviceInputManager::GetPressedKey()
+{
+	/*for (int i = 0; i < 256; i++)
+	{
+		if ((keyStates[i] & 0x80) > 0)
+			return i;
+	}*/
+	if (IsKeyDown(DIK_Z))
+		return DIK_Z;
+
+	if (IsKeyDown(DIK_X))
+		return DIK_X;
+
+	if (IsKeyDown(DIK_C))
+		return DIK_C;
+
+	if (IsKeyDown(DIK_LEFT))
+		return DIK_LEFT;
+
+	if (IsKeyDown(DIK_RIGHT))
+		return DIK_RIGHT;
+
+	if (IsKeyDown(DIK_UP))
+		return DIK_UP;
+
+	if (IsKeyDown(DIK_DOWN))
+		return DIK_DOWN;
+
+	return -1;
+}
+
 void DeviceInputManager::ProcessKeyboard()
 {
 	HRESULT hr;
@@ -102,21 +133,19 @@ void DeviceInputManager::ProcessKeyboard()
 		}
 		else
 		{
-			//DebugOut(L"[ERROR] DINPUT::GetDeviceState failed. Error: %d\n", hr);
+			DebugOut("[ERROR] DINPUT::GetDeviceState failed. Error: %d\n", hr);
 			return;
 		}
 	}
 
 	keyHandler->KeyState((BYTE *)&keyStates);
 
-
-
 	// Collect all buffered events
 	DWORD dwElements = KEYBOARD_BUFFER_SIZE;
 	hr = didv->GetDeviceData(sizeof(DIDEVICEOBJECTDATA), keyEvents, &dwElements, 0);
 	if (FAILED(hr))
 	{
-		//DebugOut(L"[ERROR] DINPUT::GetDeviceData failed. Error: %d\n", hr);
+		DebugOut("[ERROR] DINPUT::GetDeviceData failed. Error: %d\n", hr);
 		return;
 	}
 

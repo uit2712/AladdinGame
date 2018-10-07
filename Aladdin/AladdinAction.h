@@ -24,7 +24,8 @@ enum EAladdinAction
 	Sitdown,
 	StandBrandishOneDirection,
 	StandThrowApple,
-	StopRunning
+	StopRunning,
+	None
 };
 
 class AladdinAction : public Sprite
@@ -40,8 +41,15 @@ public:
 	RECT GetRectInImg();
 	RECT GetCurrentRect();
 	void NextFrame();
+	boolean IsEnd1Loop();
+	void StopRendering();
+	void EnableRendering();
+	void ResetAction();
 private:
 	// phạm vi hành động trong ảnh chung các hành động của Aladdin
 	RECT rectInImg;
 	EAladdinAction actionType;
+	boolean startLoop;
+	// dừng chuyển frame
+	boolean stopRendering;
 };

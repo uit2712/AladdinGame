@@ -37,8 +37,6 @@ protected:
 
 	// game scene
 	SceneManager*			sceneManager;
-	DeviceInputManager*		m_pDIManager;
-	IKeyEventHandler*		keyHandler;
 public:
 	Game(HINSTANCE hInstance);
 	~Game(void);

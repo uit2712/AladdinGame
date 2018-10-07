@@ -45,12 +45,6 @@ Game::~Game(void)
 		m_pD3D->Release();
 		m_pD3D = NULL;
 	}
-		
-	if (m_pDIManager != NULL)
-	{
-		delete m_pDIManager;
-		m_pDIManager = NULL;
-	}
 }
 
 bool Game::Init()
@@ -61,13 +55,8 @@ bool Game::Init()
 	if (!InitDirect3D())
 		return false;
 
-	sceneManager = new SceneManager(m_pDevice3D, SCREEN_WIDTH, SCREEN_HEIGHT);
+	sceneManager = new SceneManager(m_hWnd, m_pDevice3D, SCREEN_WIDTH, SCREEN_HEIGHT);
 	sceneManager->Load(m_pDevice3D);
-
-
-	keyHandler = new KeyHandler();
-	m_pDIManager = new DeviceInputManager();
-	m_pDIManager->InitKeyboard(m_hWnd, keyHandler);
 
 	return true;
 }
@@ -99,7 +88,7 @@ int Game::Run()
 		{
 			frameStart = now;
 
-			ProcessKeyboard();
+			sceneManager->ProcessKeyboard();
 
 			Update(dt);
 			Render(dt);
@@ -208,8 +197,7 @@ void Game::Render(float dt)
 
 void Game::ProcessKeyboard()
 {
-	m_pDIManager->ProcessKeyboard();
-
+	
 	// xử lý phím và thay đổi trạng thái của aladdin
 	
 }
