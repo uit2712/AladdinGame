@@ -99,7 +99,7 @@ void Aladdin::Update(float dt)
 	currentAction->Update(dt);
 }
 
-void Aladdin::SetActionByKeyPress(int keyCode)
+void Aladdin::ProcessAction(int keyCode)
 {
 	switch (mainAction)
 	{
@@ -206,12 +206,6 @@ void Aladdin::SetActionByKeyPress(int keyCode)
 	default:
 		break;
 	}
-}
-
-void Aladdin::ProcessAction(int keyCode)
-{
-	SetActionByKeyPress(keyCode);
-	
 }
 
 void Aladdin::SetMainAction(EAladdinAction mainAction)
