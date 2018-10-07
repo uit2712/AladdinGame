@@ -111,6 +111,11 @@ void Aladdin::ProcessAction(int keyCode)
 			SetMainAction(EAladdinAction::Sitdown);
 			SetBonusAction(EAladdinAction::None);
 			break;
+		case DIK_UP:
+			((AladdinAction*)currentAction)->ResetAction();
+			SetMainAction(EAladdinAction::LookingUp);
+			SetBonusAction(EAladdinAction::None);
+			break;
 		case BRANDISH_KEY:
 			((AladdinAction*)currentAction)->ResetAction();
 			SetBonusAction(EAladdinAction::StandBrandishOneDirection);
@@ -136,6 +141,12 @@ void Aladdin::ProcessAction(int keyCode)
 		}
 		break;
 	case BrandishTwoDirection:
+		if (((AladdinAction*)currentAction)->IsEnd1Loop())
+		{
+			((AladdinAction*)currentAction)->ResetAction();
+			SetMainAction(EAladdinAction::Stand);
+			SetBonusAction(EAladdinAction::None);
+		}
 		break;
 	case Burn:
 		break;
@@ -160,6 +171,36 @@ void Aladdin::ProcessAction(int keyCode)
 	case JumpThrowApple:
 		break;
 	case LookingUp:
+		switch (keyCode)
+		{
+		case NONE_KEY:
+			((AladdinAction*)currentAction)->ResetAction();
+			SetMainAction(EAladdinAction::Stand);
+			SetBonusAction(EAladdinAction::None);
+			break;
+		case BRANDISH_KEY:
+			SetBonusAction(EAladdinAction::BrandishTwoDirection);
+			break;
+		case THROW_APPLE_KEY:
+			SetBonusAction(EAladdinAction::StandThrowApple);
+			break;
+		case JUMP_KEY:
+			SetBonusAction(EAladdinAction::Jump);
+			break;
+		case DIK_UP:
+			if (((AladdinAction*)currentAction)->IsEnd1Loop())
+				((AladdinAction*)currentAction)->StopRendering();
+			break;
+		}
+		
+		switch (bonusAction)
+		{
+		case BrandishTwoDirection:
+		case StandThrowApple:
+		case Jump:
+			SetMainAction(bonusAction);
+			break;
+		}
 		break;
 	case Run:
 		break;
@@ -201,8 +242,7 @@ void Aladdin::ProcessAction(int keyCode)
 		case SitBrandishOneDirection:
 		case SitThrowApple:
 		case Jump:
-			if (mainAction != bonusAction)
-				SetMainAction(bonusAction);
+			SetMainAction(bonusAction);
 			break;
 		case None:
 			if (((AladdinAction*)currentAction)->IsEnd1Loop())
