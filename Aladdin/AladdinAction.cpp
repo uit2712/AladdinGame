@@ -13,6 +13,8 @@ AladdinAction::AladdinAction(EAladdinAction actionType, const D3DXVECTOR2 positi
 	this->m_Height = this->rectInImg.bottom - this->rectInImg.top;
 	this->m_Row = 1;
 	this->m_CurrentBound = 0;
+	startLoop = true;
+	stopRendering = false;
 }
 
 
@@ -38,6 +40,36 @@ RECT AladdinAction::GetCurrentRect()
 
 void AladdinAction::NextFrame()
 {
-	this->m_CurrentBound = (m_CurrentBound + 1) % m_Col;
+	if(!stopRendering)
+		m_CurrentBound = (m_CurrentBound + 1) % m_Col;
 	//MessageBox(NULL, std::to_string(m_CurrentBound).c_str(), "fsd", MB_OK);
+}
+
+void AladdinAction::StopRendering()
+{
+	if(!stopRendering)
+		stopRendering = true;
+}
+
+void AladdinAction::EnableRendering()
+{
+	if (stopRendering)
+		stopRendering = false;
+}
+
+void AladdinAction::ResetAction()
+{
+	startLoop = true;
+	m_CurrentBound = 0;
+	EnableRendering();
+}
+
+boolean AladdinAction::IsEnd1Loop()
+{
+	if (m_CurrentBound == 0)
+		startLoop = true;
+	if (m_CurrentBound == m_Col - 1)
+		startLoop = false;
+
+	return !startLoop;
 }

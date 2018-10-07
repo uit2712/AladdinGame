@@ -2,17 +2,18 @@
 
 
 
-SceneManager::SceneManager(LPDIRECT3DDEVICE9 d3ddev, UINT screenWidth, UINT screenHeight)
+SceneManager::SceneManager(HWND hWnd, LPDIRECT3DDEVICE9 d3ddev, UINT screenWidth, UINT screenHeight)
 {
 	zoom = D3DXVECTOR3(2.0f, 2.0f, 1.0f);
 	this->d3ddev = d3ddev;
 	viewPort = new ViewPort(0, 450, screenWidth / zoom.x, screenHeight / zoom.y);
-
 	aladdin = new Aladdin(D3DXVECTOR2(20, 530));
-
 	camera = new Camera(screenWidth, screenHeight, 0.0f, zoom);
-
 	scenes.push_back(new Background(GameObjectTypes::Map1, MAP1_PATH, viewPort));
+
+	keyHandler = new KeyHandler();
+	m_pDIManager = new DeviceInputManager();
+	m_pDIManager->InitKeyboard(hWnd, keyHandler);
 }
 
 
@@ -37,6 +38,12 @@ SceneManager::~SceneManager()
 			scenes[i] = NULL;
 		}
 	}
+
+	if (m_pDIManager != NULL)
+	{
+		delete m_pDIManager;
+		m_pDIManager = NULL;
+	}
 }
 
 void SceneManager::Load(LPDIRECT3DDEVICE9 d3ddev)
@@ -58,15 +65,11 @@ void SceneManager::Draw(float dt)
 
 void SceneManager::SetViewPort()
 {
-	
 	// tạm thời chưa có vtpt: cập nhật viewport khi aladdin nhảy lên hoặc rớt xuống (tọa độ y lệch)
-	if ((int)(aladdin->GetPosition().y + aladdin->GetHeight() / 2.0f) > (int)(viewPort->GetY() + viewPort->GetHeight() / 2.0f))
-	{
-		DebugOut("yAladdin=" + std::to_string((int)(aladdin->GetPosition().y + aladdin->GetHeight() / 2.0f)) + ", yViewport=" + std::to_string((int)((float)viewPort->GetY() + viewPort->GetHeight() / 2.0f)) + "\n");
-		float y = aladdin->GetPosition().y + aladdin->GetHeight()/2.0f - viewPort->GetHeight()/2.0f;
-		viewPort->SetY(y);
-		
-	}
+	/*float y = aladdin->GetPosition().y + aladdin->GetHeight() / 2.0f - viewPort->GetHeight() / 2.0f - viewPort->GetY();
+	DebugOut(std::to_string(y) + "\n");
+	if (y >= -40)
+		viewPort->SetY(aladdin->GetPosition().y - viewPort->GetHeight() / 2.0f);*/
 
 	// cập nhật viewport khi aladdin nhảy lên hoặc rớt xuống (tọa độ y lệch)
 	if (aladdin->GetPosition().x + aladdin->GetWidth() / 2.0f > viewPort->GetX() + viewPort->GetWidth() / 2.0f)
@@ -81,12 +84,19 @@ void SceneManager::SetViewPort()
 	}
 }
 
+void SceneManager::ProcessKeyboard()
+{
+	m_pDIManager->ProcessKeyboard();
+}
+
 void SceneManager::Update(float dt)
 {
 	if (aladdin)
+	{
 		aladdin->Update(0.0f); // cập nhật aladdin
-
-	SetViewPort();
+		aladdin->ProcessAction(m_pDIManager->GetPressedKey());
+	}
+		
 
 	if (scenes.size() > 0)
 	{
@@ -96,4 +106,6 @@ void SceneManager::Update(float dt)
 
 	camera->Update(viewPort);
 	if (camera) camera->SetTransform(d3ddev);
+
+	SetViewPort();
 }

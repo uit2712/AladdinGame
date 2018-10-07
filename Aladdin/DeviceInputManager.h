@@ -4,6 +4,7 @@
 #include <d3dx9.h>
 #include "Debug.h"
 #include "IKeyEventHandler.h"
+#include "KeyHandler.h"
 
 #define DIRECTINPUT_VERSION 0x0800
 #include <dinput.h>
@@ -31,6 +32,7 @@ public:
 	void InitKeyboard(HWND hWnd, LPKEYEVENTHANDLER handler);
 	int IsKeyDown(int KeyCode);
 	void ProcessKeyboard();
+	int GetPressedKey();
 	DeviceInputManager();
 	~DeviceInputManager();
 };

@@ -31,7 +31,8 @@ void Aladdin::InitProperties(D3DXVECTOR2 position)
 	m_Color = D3DCOLOR_XRGB(255, 255, 255);
 	m_Position = position;
 	direction = EDirection::Right;
-	currentAction = actions[EAladdinAction::StandBrandishOneDirection];
+	mainAction = EAladdinAction::Stand;
+	currentAction = actions[EAladdinAction::Stand];
 }
 
 Aladdin::~Aladdin()
@@ -96,5 +97,129 @@ void Aladdin::Draw(float dt)
 void Aladdin::Update(float dt)
 {
 	currentAction->Update(dt);
-	m_Position = D3DXVECTOR2(m_Position.x + 2, m_Position.y);
+}
+
+void Aladdin::ProcessAction(int keyCode)
+{
+	switch (mainAction)
+	{
+	case Stand:
+		switch (keyCode)
+		{
+		case DIK_DOWN:
+			((AladdinAction*)currentAction)->ResetAction();
+			SetMainAction(EAladdinAction::Sitdown);
+			SetBonusAction(EAladdinAction::None);
+			break;
+		default:
+			break;
+		}
+		break;
+	case BrandishTwoDirection:
+		break;
+	case Burn:
+		break;
+	case ClimbBrandishOneDirection:
+		break;
+	case ClimbJump:
+		break;
+	case ClimbString:
+		break;
+	case ClimbThrowApple:
+		break;
+	case Jump:
+		switch (bonusAction)
+		{
+		case Jump:
+			if (((AladdinAction*)currentAction)->IsEnd1Loop())
+			{
+				((AladdinAction*)currentAction)->ResetAction();
+				SetMainAction(EAladdinAction::Sitdown);
+				SetBonusAction(EAladdinAction::None);
+			}
+			break;
+		}
+		break;
+	case JumpBrandishOneDirection:
+		break;
+	case JumpThrowApple:
+		break;
+	case LookingUp:
+		break;
+	case Run:
+		break;
+	case RunAndJump:
+		break;
+	case SitBrandishOneDirection:
+	case SitThrowApple:
+		if (((AladdinAction*)currentAction)->IsEnd1Loop())
+		{
+			((AladdinAction*)currentAction)->ResetAction();
+			SetMainAction(EAladdinAction::Sitdown);
+			SetBonusAction(EAladdinAction::None);
+		}
+		break;
+	case Sitdown:
+		switch (keyCode)
+		{
+		case NONE_KEY:
+			((AladdinAction*)currentAction)->ResetAction();
+			SetMainAction(EAladdinAction::Stand);
+			SetBonusAction(EAladdinAction::None);
+			break;
+		case BRANDISH_KEY:
+			SetBonusAction(EAladdinAction::SitBrandishOneDirection);
+			break;
+		case THROW_APPLE_KEY:
+			SetBonusAction(EAladdinAction::SitThrowApple);
+			break;
+		case JUMP_KEY:
+			SetBonusAction(EAladdinAction::Jump);
+			break;
+		case DIK_DOWN:
+			if (((AladdinAction*)currentAction)->IsEnd1Loop())
+				((AladdinAction*)currentAction)->StopRendering();
+			break;
+		}
+		switch (bonusAction)
+		{
+		case SitBrandishOneDirection:
+		case SitThrowApple:
+		case Jump:
+			if (mainAction != bonusAction)
+				SetMainAction(bonusAction);
+			break;
+		case None:
+			if (((AladdinAction*)currentAction)->IsEnd1Loop())
+				((AladdinAction*)currentAction)->StopRendering();
+			break;
+		}
+		break;
+	case StandBrandishOneDirection:
+		break;
+	case StandThrowApple:
+		break;
+	case StopRunning:
+		break;
+	case None:
+		break;
+	default:
+		break;
+	}
+}
+
+void Aladdin::SetMainAction(EAladdinAction mainAction)
+{
+	if (this->mainAction != mainAction)
+	{
+		this->mainAction = mainAction;
+		currentAction = actions[this->mainAction];
+	}
+		
+}
+
+void Aladdin::SetBonusAction(EAladdinAction bonusAction)
+{
+	if(this->bonusAction != bonusAction)
+		this->bonusAction = bonusAction;
 }
